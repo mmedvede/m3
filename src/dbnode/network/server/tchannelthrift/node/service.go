@@ -51,11 +51,11 @@ import (
 	xtime "github.com/m3db/m3/src/x/time"
 
 	apachethrift "github.com/apache/thrift/lib/go/thrift"
+	"github.com/m3db/m3/src/dbnode/namespace"
 	opentracinglog "github.com/opentracing/opentracing-go/log"
 	"github.com/uber-go/tally"
 	"github.com/uber/tchannel-go/thrift"
 	"go.uber.org/zap"
-	"github.com/m3db/m3/src/dbnode/namespace"
 )
 
 var (
@@ -453,6 +453,7 @@ func (s *service) Fetch(tctx thrift.Context, req *rpc.FetchRequest) (*rpc.FetchR
 	datapoints, err := s.readDatapoints(ctx, db, nsID, tsID, start, end,
 		req.ResultTimeType)
 	if err != nil {
+		fmt.Printf("j>> nuu: %+v\n", err)
 		s.metrics.fetch.ReportError(s.nowFn().Sub(callStart))
 		return nil, convert.ToRPCError(err)
 	}
@@ -498,6 +499,7 @@ func (s *service) readDatapoints(
 	}
 
 	if err := multiIt.Err(); err != nil {
+		fmt.Printf("j>> %+v\n", "??")
 		return nil, err
 	}
 

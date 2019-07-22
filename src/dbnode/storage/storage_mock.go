@@ -1719,6 +1719,20 @@ func (mr *MockdatabaseShardMockRecorder) Bootstrap(bootstrappedSeries interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Bootstrap", reflect.TypeOf((*MockdatabaseShard)(nil).Bootstrap), bootstrappedSeries)
 }
 
+// Load mocks base method
+func (m *MockdatabaseShard) Load(series *result.Map) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Load", series)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Load indicates an expected call of Load
+func (mr *MockdatabaseShardMockRecorder) Load(series interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Load", reflect.TypeOf((*MockdatabaseShard)(nil).Load), series)
+}
+
 // WarmFlush mocks base method
 func (m *MockdatabaseShard) WarmFlush(blockStart time.Time, flush persist.FlushPreparer, nsCtx namespace.Context) error {
 	m.ctrl.T.Helper()

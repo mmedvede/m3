@@ -219,10 +219,6 @@ func (m *seekerManager) ConcurrentIDBloomFilter(shard uint32, start time.Time) (
 	byTime.RUnlock()
 
 	if ok && seekers.active.wg == nil {
-		// Returned resource that is not tracked!!!!!
-		// 1. Goroutine1 calls seekerManager.ConcurrentIDBloomFilter()
-		// 2. SeekerManager closes seeker associated with bloom filter
-		// 3. Goroutine1 tries to use bloom filter from step 1, but that resource is no longer valid.
 		return seekers.active.bloomFilter, nil
 	}
 
